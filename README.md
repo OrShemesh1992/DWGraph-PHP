@@ -10,3 +10,6 @@ I learned to make the differences in writing the functions and algorithms betwee
 
 - This project contains the algorithms - to find the shortest route. <br>
   dijekstra- uses to find the shortest path in a directed weighted graph.
+
+## Result:
+<img src="https://raw.githubusercontent.com/OrShemesh1992/DWGraph-PHP/master/image/Result.png" width="600" height="320">
