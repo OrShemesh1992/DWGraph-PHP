@@ -36,7 +36,11 @@ class Graph implements interfaceGraph
 
     public function get_all_edge(int $id): array
     {
-        return $this->edges[$id];
+        if (is_array($this->edges[$id])) {
+            return $this->edges[$id];
+        }else{
+            return array();
+        }
     }
 
     public function get_mc(): int
@@ -47,7 +51,7 @@ class Graph implements interfaceGraph
     public function add_edge(int $id1, int $id2, float $weight): bool
     {
         $e=new Edge($id1,$id2,$weight);
-        if ($weight>=0&&$id1!=$id2&&array_key_exists($id1,$this->vertexs)&&array_key_exists($id2,$this->vertexs)&&!array_key_exists($id2,$this->edges[$id1])){
+        if ($weight>=0&&$id1!=$id2&&array_key_exists($id1,$this->vertexs)&&array_key_exists($id2,$this->vertexs)&&!array_key_exists($id2,(array)$this->edges[$id1])){
             $this->edges[$id1][$id2] = $e;
             $this->mc++;
             $this->size_edge++;

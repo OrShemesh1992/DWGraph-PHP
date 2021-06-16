@@ -19,12 +19,13 @@ class Algorithm implements interfaceAlgo
         $pq = new SplPriorityQueue();
         $start =  $this->g->get_all_vertex()[$src];
         $start->weight=0;
-        echo "bdika <br>";
+
         $pq->insert($start, $start->weight);
-        while(!$pq->isEmpty()){
+
+        while(!($pq->isEmpty())){
+
             $v = $pq->extract();
-            $t= count($pq);
-            echo "<br> $t";
+
             foreach($this->g->get_all_edge($v->getId()) as $key => $val){
 
                 $u=$this->g->get_all_vertex()[$key];
@@ -38,20 +39,23 @@ class Algorithm implements interfaceAlgo
                 }
             }
         }
-        echo "bdika";
+
         $end =  $this->g->get_all_vertex()[$dest];
         if($end->weight == PHP_INT_MAX){
             echo "No have a path";
         }
-
         $arr = array($end->getId());
         $str = $end->info;
         while($str!=""){
-            $node = $this->g->get_all_vertex()[$str] -> getId();
-            array_push($arr,$node);
-        }
-        echo implode(" ", $arr);
+            $node = $this->g->get_all_vertex()[$str];
 
+            array_push($arr,$node->getId());
+            $str = $node->info;
+        }
+        echo "Shortest path is: ";
+        echo implode(" -> ", array_reverse($arr));
+        echo "<br> Weight is : ";
+        echo  $end->weight;
     }
 
     private function init(){
@@ -66,47 +70,17 @@ $g = new Graph();
 $g->add_vertex(1);
 $g->add_vertex(2);
 $g->add_vertex(3);
-$g->add_edge(1,2,5);
+$g->add_vertex(4);
+$g->add_vertex(5);
+$g->add_vertex(6);
+$g->add_edge(1,2,4);
 $g->add_edge(1,3,2);
-$g->add_edge(3,2,2);
-
-echo "size v: ";
-echo  $g->vertex_size();
-echo "<br>mc: ";
-echo  $g->get_mc();
-echo "<br>size e: ";
-echo $g->edge_size();
-echo "<br>";
-echo $g;
-
+$g->add_edge(2,3,5);
+$g->add_edge(2,4,10);
+$g->add_edge(3,5,3);
+$g->add_edge(4,6,11);
+$g->add_edge(5,4,4);
 $algo = new Algorithm($g);
-$algo ->Dijkstra(1,2);
+$algo ->Dijkstra(1,6);
 
-
-//
-//
-//$g ->remove_vertex(1);
-//
-//echo $g;
-//
-//echo "size v: ";
-//echo  $g->vertex_size();
-//echo "<br>mc: ";
-//echo  $g->get_mc();
-//echo "<br>size e: ";
-//echo $g->edge_size();
-
-
-
-
-//$queue = new \Ds\Queue();
-//
-//$queue->push("a",  5);
-//$queue->push("b", 15);
-//$queue->push("c", 10);
-//
-//echo $queue->pop();
-//print_r($queue->pop());
-//print_r($queue->pop());
-//print_r($queue->pop());
-
+?>
