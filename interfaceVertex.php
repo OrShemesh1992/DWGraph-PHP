@@ -4,4 +4,3 @@ interface interfaceVertex {
     public function getPos():array;
     public function setPos(array $pos);
 }
-?>

@@ -4,4 +4,3 @@ interface interfaceEdge {
     public function getDest():int;
     public function getWeight():float;
 }
-?>

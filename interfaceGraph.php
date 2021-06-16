@@ -10,4 +10,3 @@ interface interfaceGraph {
     public function remove_vertex(int $id):bool;
     public function remove_edge(int $id1,int $id2):bool;
 }
-?>

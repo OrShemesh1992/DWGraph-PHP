@@ -8,13 +8,14 @@ class Vertex implements interfaceVertex
 
     public float $weight;
     public int $tag;
-
+    public string $info;
     public function __construct(int $key, array $pos =array(0,0))
     {
         $this->key = $key;
         $this -> weight = 0;
         $this->tag = 0;
         $this->pos = $pos;
+        $this->info="";
     }
 
     public function getId() :int
