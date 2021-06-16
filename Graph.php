@@ -47,7 +47,7 @@ class Graph implements interfaceGraph
     public function add_edge(int $id1, int $id2, float $weight): bool
     {
         $e=new Edge($id1,$id2,$weight);
-        if ($id1!=$id2&&array_key_exists($id1,$this->vertexs)&&array_key_exists($id2,$this->vertexs)&&!array_key_exists($id2,$this->edges[$id1])){
+        if ($weight>=0&&$id1!=$id2&&array_key_exists($id1,$this->vertexs)&&array_key_exists($id2,$this->vertexs)&&!array_key_exists($id2,$this->edges[$id1])){
             $this->edges[$id1][$id2] = $e;
             $this->mc++;
             $this->size_edge++;
@@ -72,12 +72,41 @@ class Graph implements interfaceGraph
 
     public function remove_vertex(int $id): bool
     {
-        return false;
+        if(array_key_exists($id,$this->vertexs)){
+
+            foreach($this->edges as $src => $arr) {
+                if(array_key_exists($id,$arr)) {
+                    unset($this->edges[$src][$id]);
+                    $this->mc++;
+                    $this->size_edge--;
+                }
+            }
+            foreach($this->edges[$id] as $dest => $edge) {
+                unset($this->edges[$id][$dest]);
+                $this->mc++;
+                $this->size_edge--;
+            }
+
+            unset($this->vertexs[$id]);
+            $this->mc++;
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     public function remove_edge(int $id1, int $id2): bool
     {
-        return false;
+
+        if ($id1!=$id2&&array_key_exists($id1,$this->vertexs)&&array_key_exists($id2,$this->vertexs)&&array_key_exists($id2,$this->edges[$id1])){
+            unset($this->edges[$id1][$id2] ) ;
+            $this->mc++;
+            $this->size_edge--;
+            return true;
+        }else {
+            return false;
+        }
     }
     public function __toString()
     {
@@ -93,20 +122,33 @@ class Graph implements interfaceGraph
     }
 }
 
-$g = new Graph();
-$g->add_vertex(1,array(1,2));
-$g->add_vertex(1);
-$g->add_vertex(2);
-$g->add_edge(1,2,3.5);
-$g->add_edge(1,2,3.5);
-$g->add_edge(2,3,3.5);
-$g->add_edge(3,2,3.5);
-$g->add_edge(2,1,3.5);
-
-echo $g;
-echo "size v: ";
-echo  $g->vertex_size();
-echo "<br>mc: ";
-echo  $g->get_mc();
-echo "<br>size e: ";
-echo $g->edge_size();
+//$g = new Graph();
+//$g->add_vertex(1,array(1,2));
+//$g->add_vertex(1);
+//$g->add_vertex(2);
+//$g->add_edge(1,2,3.5);
+//$g->add_edge(1,2,3.5);
+//$g->add_edge(2,3,3.5);
+//$g->add_edge(3,2,3.5);
+//$g->add_edge(2,1,3.5);
+//
+//$g->remove_edge(1,3);
+//echo $g;
+//echo "size v: ";
+//echo  $g->vertex_size();
+//echo "<br>mc: ";
+//echo  $g->get_mc();
+//echo "<br>size e: ";
+//echo $g->edge_size();
+//
+//echo "<br>";
+//$g ->remove_vertex(1);
+//
+//echo $g;
+//
+//echo "size v: ";
+//echo  $g->vertex_size();
+//echo "<br>mc: ";
+//echo  $g->get_mc();
+//echo "<br>size e: ";
+//echo $g->edge_size();
