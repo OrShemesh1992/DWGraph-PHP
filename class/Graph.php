@@ -1,8 +1,8 @@
 <?php
 
-include "interfaceGraph.php";
-include "Edge.php";
-include "Vertex.php";
+include "../interface/interfaceGraph.php";
+include "../class/Edge.php";
+include "../class/Vertex.php";
 
 class Graph implements interfaceGraph
 {

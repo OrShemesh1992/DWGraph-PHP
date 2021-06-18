@@ -1,7 +1,7 @@
 <?php
 
-include "interfaceAlgo.php";
-include "Graph.php";
+include "../interface/interfaceAlgo.php";
+include "../class/Graph.php";
 class Algorithm implements interfaceAlgo
 {
     private Graph $g;

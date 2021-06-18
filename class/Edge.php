@@ -1,6 +1,6 @@
 <?php
 
-include "interfaceEdge.php";
+include "../interface/interfaceEdge.php";
 
 class Edge implements interfaceEdge
 {

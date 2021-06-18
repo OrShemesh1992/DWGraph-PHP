@@ -1,5 +1,5 @@
 <?php
-include "interfaceVertex.php";
+include "../interface/interfaceVertex.php";
 
 class Vertex implements interfaceVertex
 {
